@@ -18,6 +18,10 @@ while true; do
     esac
 done
 
+if [ -z ${EDITOR+x} ]; then
+    EDITOR="vim"
+fi
+
 if [ -z ${LBDIR+x} ]; then
     LBDIR="$HOME/notes/"
 fi
@@ -34,4 +38,4 @@ fi
 
 echo "editing $LOGFNM"
 
-vim "$LBDIR/$LOGFNM"
+eval "$EDITOR $LBDIR"/"$LOGFNM"
