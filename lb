@@ -4,22 +4,18 @@ set -e
 DATE=`date +%Y-%m-%d`
 TOPIC=""
 
-ARGSTMP=`getopt -o t: --long topic: -n 'lb' -- "$@"`
-eval set -- "$ARGSTMP"
+args=`getopt t: "$*"`
+set -- $args
 
-while true; do
-    case "$1" in
-        -t|--topic)
-            case "$2" in
-                "") shift 2 ;;
-                *) TOPIC=$2 ; shift 2 ;;
-            esac ;;
+for i ; do
+    case "$i" in
+        -t) TOPIC=$2 ; shift ; shift ;;
         --) shift ; break ;;
     esac
 done
 
-if [ -z ${EDITOR+x} ]; then
-    EDITOR="vim"
+if [ -z ${LBEDITOR+x} ]; then
+    LBEDITOR="vim"
 fi
 
 if [ -z ${LBDIR+x} ]; then
@@ -31,11 +27,17 @@ if [ ! -e $LBDIR ]; then
 fi
 
 if [ "$TOPIC" == "" ]; then
-    LOGFNM="$DATE.md"
+    LOGNAME="$DATE"
 else
-    LOGFNM="$TOPIC"_"$DATE.md"
+    LOGNAME="$TOPIC"_"$DATE"
 fi
 
-echo "editing $LOGFNM"
+LOGFNM="$LBDIR"/"$LOGNAME".md
 
-eval "$EDITOR $LBDIR"/"$LOGFNM"
+if [ ! -e $LOGFNM ] ; then
+    echo "# $TOPIC $DATE" > $LOGFNM
+fi
+
+echo "editing $LOGNAME.md"
+
+eval "$LBEDITOR $LOGFNM"

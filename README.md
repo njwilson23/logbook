@@ -2,12 +2,12 @@
 
 ## Usage
 
-    lb [-t|--topic TOPICNAME]
+    lb [-t TOPICNAME]
 
 Opens an editor to a journal entry labelled with the current date
 
 ## Configuration
 
-    LBDIR   directory to put journal files in
-    EDITOR  editor command
+    LBDIR       directory to put journal files in
+    LBEDITOR    editor command
 
