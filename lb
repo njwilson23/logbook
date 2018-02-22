@@ -14,15 +14,15 @@ for i ; do
     esac
 done
 
-if [ -z ${LBEDITOR+x} ]; then
+if [ -z ${LBEDITOR+nothing} ]; then
     LBEDITOR="vim"
 fi
 
-if [ -z ${LBDIR+x} ]; then
-    LBDIR="$HOME/notes/"
+if [ -z ${LBDIR+nothing} ]; then
+    LBDIR="$HOME/notes"
 fi
 
-if [ ! -e $LBDIR ]; then
+if [ ! -d $LBDIR ]; then
     mkdir -p $LBDIR
 fi
 
