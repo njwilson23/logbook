@@ -35,7 +35,7 @@ fi
 LOGFNM="$LBDIR"/"$LOGNAME".md
 
 if [ ! -e $LOGFNM ] ; then
-    echo "# $TOPIC $DATE" > $LOGFNM
+    echo "# $TOPIC $DATE" | sed 's/\s\+/ /g' | tr _ - > $LOGFNM
 fi
 
 echo "editing $LOGNAME.md"
