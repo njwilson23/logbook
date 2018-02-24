@@ -3,12 +3,18 @@
 DATE=`date +%Y-%m-%d`
 TOPIC=""
 
-args=`getopt t: "$*"` || exit 1
+args=`getopt t: "$*"`
+if [ $? != 0 ]; then
+    echo "Usage: lb [-t TOPIC] [-d DIRNAME]"
+    exit 1
+fi
+
 set -- $args
 
 for i in $@; do
     case "$i" in
         -t) TOPIC=$2 ; shift ; shift ;;
+        -d) LBDIR=$2 ; shift ; shift ;;
         --) shift ; break ;;
     esac
 done
