@@ -1,13 +1,12 @@
 #! /bin/bash
-set -e
 
 DATE=`date +%Y-%m-%d`
 TOPIC=""
 
-args=`getopt t: "$*"`
+args=`getopt t: "$*"` || exit 1
 set -- $args
 
-for i ; do
+for i in $@; do
     case "$i" in
         -t) TOPIC=$2 ; shift ; shift ;;
         --) shift ; break ;;
@@ -18,12 +17,12 @@ if [ -z ${LBEDITOR+nothing} ]; then
     LBEDITOR="vim"
 fi
 
-if [ -z ${LBDIR+nothing} ]; then
+if [ -z "${LBDIR+nothing}" ]; then
     LBDIR="$HOME/notes"
 fi
 
-if [ ! -d $LBDIR ]; then
-    mkdir -p $LBDIR
+if [ ! -d "$LBDIR" ]; then
+    mkdir -p "$LBDIR" || exit 1
 fi
 
 if [ "$TOPIC" == "" ]; then
@@ -34,10 +33,10 @@ fi
 
 LOGFNM="$LBDIR"/"$LOGNAME".md
 
-if [ ! -e $LOGFNM ] ; then
-    echo "# $TOPIC $DATE" | sed 's/\s\+/ /g' | tr _ - > $LOGFNM
+if [ ! -e "$LOGFNM" ] ; then
+    echo "# $TOPIC $DATE" | sed 's/\s\+/ /g' | tr _ - > "$LOGFNM"
 fi
 
 echo "editing $LOGNAME.md"
 
-eval "$LBEDITOR $LOGFNM"
+eval $LBEDITOR "\"$LOGFNM\""
