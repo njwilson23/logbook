@@ -51,13 +51,4 @@ func main() {
 		}
 	}
 	fmt.Print("\n")
-
-	/*fmt.Println(resp.ContentLength)
-	body := make([]byte, resp.ContentLength)
-	n, err := resp.Body.Read(body)
-	if int64(n) != resp.ContentLength {
-		log.Println(err)
-	}
-
-	fmt.Println(string(body))*/
 }

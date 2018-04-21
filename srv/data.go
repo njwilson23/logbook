@@ -8,7 +8,7 @@ import (
 )
 
 type Match struct {
-	Document           Document `json:"logEntry"`
+	Document           Document `json:"document"`
 	MatchingLine       string   `json:"line"`
 	MatchingLineNumber int      `json:"lineNumber"`
 }
