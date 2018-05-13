@@ -66,9 +66,9 @@ func getEntry(topic string, reldays int) *Entry {
 	date := time.Now().Truncate(time.Hour * 24).Add(time.Hour * time.Duration(reldays*24))
 	var topicStr string
 	if topic != "" {
-		topicStr = fmt.Sprintf("-%s", topic)
+		topicStr = fmt.Sprintf("%s-", topic)
 	}
-	filename := filepath.Join(notesDir, fmt.Sprintf("%s%s.md", date.Format("2006-01-02"), topicStr))
+	filename := filepath.Join(notesDir, fmt.Sprintf("%s%s.md", topicStr, date.Format("2006-01-02")))
 
 	exists := true
 	if _, err := os.Stat(filename); os.IsNotExist(err) {
