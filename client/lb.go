@@ -37,8 +37,8 @@ func getEditor() string {
 	return editor
 }
 
-func run(topic string, reldays int) {
-	entry := getEntry(topic, reldays)
+func run(topic string, offsetDays int) {
+	entry := getEntry(topic, offsetDays)
 
 	err := entry.AddHeader()
 	if err != nil {
@@ -57,13 +57,13 @@ func run(topic string, reldays int) {
 	}
 }
 
-func getEntry(topic string, reldays int) *Entry {
+func getEntry(topic string, offsetDays int) *Entry {
 	notesDir := os.Getenv("LBDIR")
 	if notesDir == "" {
 		notesDir = filepath.Join(os.Getenv("HOME"), "notes")
 	}
 
-	date := time.Now().Truncate(time.Hour * 24).Add(time.Hour * time.Duration(reldays*24))
+	date := time.Now().Add(time.Hour * time.Duration(24*offsetDays))
 	var topicStr string
 	if topic != "" {
 		topicStr = fmt.Sprintf("%s-", topic)
